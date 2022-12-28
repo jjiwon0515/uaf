@@ -1,6 +1,6 @@
 # uaf
 
-
+```
 #include <fcntl.h>
 #include <iostream> 
 #include <cstring>
@@ -80,7 +80,7 @@ int main(int argc, char* argv[]){
 
         return 0;
 }
-
+```
 
 위의 코드를 기반으로 모르는 부분들을 공부하고 힌트가 될만한 case2 부분을 집중적으로 봤다.
 class 부분을 이전에 구조체만 공부했는데 처음 보는 문법들을 새로 공부할 수 있는 시간이었다.
