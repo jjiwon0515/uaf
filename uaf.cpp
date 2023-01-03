@@ -69,14 +69,21 @@ public:
 # 객체 포인터 배열 : 클래스명 * 객체명[크기];
 # new와 delete를 이용한 동적 메모리 할당
         # new 생성자 : 주솟값을 return하기 때문에 포인터 변수에 저장해야한다.
+        # delete : 동적 할당을 취소, 운영체제에 반환
 # this 포인터를 이용한 매개 변수와 멤버 변수의 구분
+# 클래스 멤버에 대한 포인터 : "->" (화살표 연산자) : 주소에 있는 값을 가져온다.  (.을 사용해도 되지만 현재 코드에서는 m,w가 포인터 멤버이기때문에 화살표 연산자 사용)
 
 int main(int argc, char* argv[]){
         Human* m = new Man("Jack", 25); # 객체 포인터 배열 : 클래스명 * 객체명, new를 통한 동적 할당(주소값 반환)
         Human* w = new Woman("Jill", 21);
-
+        
+        # m과 w 포인터 변수에 Man과 Woman에 매개 변수에 값 넣고 멤버 변수에 값 저장된 주소값을 포인터에 저장
+        
         size_t len;
         char* data;
+        
+        # data 포인터 변수 선언 
+        
         unsigned int op;
         while(1){
                 cout << "1. use\n2. after\n3. free\n";
@@ -105,11 +112,12 @@ int main(int argc, char* argv[]){
         return 0;
 }
 
-```
-https://jhnyang.tistory.com/334
-new 생성자 : 주소를 return 하기 떄문에 new의 값을 저장하는 변수는 포인터 변수여야한다.
-            ex) new 
 
+# https://jhnyang.tistory.com/334
+# new 생성자 : 주소를 return 하기 때문에 new의 값을 저장하는 변수는 포인터 변수여야한다.
+# 객체명과 멤버 변수의 차이 : 
+        # 객체명 : 하나의 틀인 클래스에서 들어갈 재료/ 예시) 붕어빵 틀에 들어갈 재료
+        # 멤버 변수 : 하나의 틀을 구성할 요소/ 예시) 붕어빵 틀 
 
 
 
