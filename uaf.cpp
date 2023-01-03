@@ -3,10 +3,16 @@
 #include <cstring>
 #include <cstdlib>
 #include <unistd.h>
+
+
+# std, cout, endl 함수들을 사용할 수 있게 한다. 또한 namespace는 어떤 변수나 함수의 소속을 알려주는 기능을 한다.
+# 
 using namespace std;
 
-#c++ 구조체와 클래스
+# c++ 구조체와 클래스
 
+
+# Human이라는 클래스 생성
 class Human{
 private:
         virtual void give_shell(){
@@ -22,6 +28,10 @@ public:
         }
 };
 
+
+# Man이라는 클래스 생성
+# Human 클래스 상속받음 (class Man : public Human) 
+# 여기서는 Human을 부모 클래스, Man을 자식 클래스라고 칭한다
 class Man: public Human{
 public:
         Man(string name, int age){
@@ -34,6 +44,13 @@ public:
         }
 };
 
+
+# Woman이라는 클래스 생성
+# Human 클래스를 상속받음
+# 여기서는 Human을 부모 클래스, Woman을 자식 클래스라고 칭한다.
+# this 포인터를 통해 매개 변수 name와 멤버 변수를 name을 구분 짓는다 (다른 방법: 매개 변수와 멤버 변수의 이름을 다르게 해도 해결된다.) 
+# 범위 지정 연산자( "::" ) :  여러 형태를 사용될 수 있다 (:: 식별자, 클래스이름 :: 식별자, 네임스페이스 :: 식별자, 열거체 :: 식별자 )
+        # 여기서는 Human :: introduce() -> Human에 있는 introduce 함수를 사용한다.
 class Woman: public Human{
 public:
         Woman(string name, int age){
@@ -46,8 +63,16 @@ public:
         }
 };
 
+
+# main 함수
+# 객체 배열 : 클래스명 객체명[크기];
+# 객체 포인터 배열 : 클래스명 * 객체명[크기];
+# new와 delete를 이용한 동적 메모리 할당
+        # new 생성자 : 주솟값을 return하기 때문에 포인터 변수에 저장해야한다.
+# this 포인터를 이용한 매개 변수와 멤버 변수의 구분
+
 int main(int argc, char* argv[]){
-        Human* m = new Man("Jack", 25);
+        Human* m = new Man("Jack", 25); # 객체 포인터 배열 : 클래스명 * 객체명, new를 통한 동적 할당(주소값 반환)
         Human* w = new Woman("Jill", 21);
 
         size_t len;
@@ -79,3 +104,12 @@ int main(int argc, char* argv[]){
 
         return 0;
 }
+
+```
+https://jhnyang.tistory.com/334
+new 생성자 : 주소를 return 하기 떄문에 new의 값을 저장하는 변수는 포인터 변수여야한다.
+            ex) new 
+
+
+
+
