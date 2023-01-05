@@ -1,12 +1,14 @@
 #include <iostream>
 #include <cstring>
 
-
+# std 소속의 함수들을 사용할 수 있도록 한다.
 using namespace std;
 
+
+# Car 클래스를 생성한다.
 class Car
 {
-
+# 접근 제어자 : private , public , protected 
 private:
     // 멤버 상수
     enum
@@ -17,10 +19,12 @@ private:
         ACC_STEP = 10,
         BRK_STEP = 10
     };
+    
     // 맴버 변수
     char gamerID[ID_LEN];
     int fuelGauge;
     int curSpeed;
+    
 public:
     // 맴버 함수
     void InitMembers(const char* ID, int fuel);
@@ -29,6 +33,8 @@ public:
     void Break();
 };
 
+
+# Car 클래스 안에서 선언한 InitMembers 함수를 지정한다. (::) 접근 허용 연산자 
 void Car::InitMembers(const char* ID, int fuel)
 {
     strcpy_s(gamerID, ID);  // strcpy는 안전하지 않은 함수이므로 strcpy_s 사용
@@ -36,6 +42,9 @@ void Car::InitMembers(const char* ID, int fuel)
     curSpeed = 0;
 }
 
+
+
+# Car 클래스 안의 ShowCarState() 함수를 지정한다. 
 void Car::ShowCarState()
 {
     cout << "소유자 ID: " << gamerID << endl;
@@ -43,6 +52,10 @@ void Car::ShowCarState()
     cout << "현재 속도: " << curSpeed << "km/h" << endl << endl;
 }
 
+
+
+
+# Car 클래스 안의 Accel() 함수를 지정한다. 
 void Car::Accel()
 {
     if (fuelGauge <= 0)
@@ -58,6 +71,8 @@ void Car::Accel()
     curSpeed += ACC_STEP;
 }
 
+
+#Car 클래스 안의 Break() 함수를 지정한다. 
 void Car::Break()
 {
     if (curSpeed < BRK_STEP)
