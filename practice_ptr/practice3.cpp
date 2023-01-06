@@ -80,6 +80,7 @@ void Car::Break()
 
 
 
+//메인 함수
 int main(void)
 {
     Car run99;  // 클래스 Car의 객체 run99
