@@ -1,0 +1,11 @@
+#include "Pony.hpp"
+
+int main(void)
+{
+    Pony stackPony("STACK"); // 정적할당
+
+    stackPony.setNum("Second"); //인스턴스 접근
+    std::cout << stackPony.getNum() << " Pony is on stack memory." << std::endl;
+  
+    return (0);
+}
