@@ -1,0 +1,32 @@
+#include <iostream>
+
+
+// using namespace를 사용하여 std 소속된 함수를 사용할 수 있게 된다.
+using namespace std;
+
+
+// test라는 클래스를 생성한다.
+// 접근 허용자 : private , public, protected를 사용가능하다.
+class test {
+private:
+    int num;
+public:
+    void setNum(int n) {num = n;}
+    int getNum() {return num;}
+};
+
+
+
+// 클래스명 객체명 : 객체 생성 (해당 코드에서는 포인터 변수로 생성한다.)
+int main() {
+    test *t;
+    // new는 &와 같은 역할을 한다. t = &test로 되어서 포인터 변수에 주소값을 저장한다.
+    t = new test();
+    
+    
+    t -> setNum(22);
+    cout << t -> getNum() << endl; // 22
+    cout << t; // 주소값이 나옴.
+    delete t;
+    return 0;
+}
