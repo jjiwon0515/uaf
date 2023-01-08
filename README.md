@@ -213,3 +213,50 @@ c언어 구조체에서 new를 통한 동적할당을 할 수 있고 delete가 f
 give_shell함수는 0x00401570 주소에 위치하고 있고 함수를 call할 때 0x00401570 + 0x8 값의 결과를 부르기 때문에 애초에 0x00401570 - 0x8 = 0x00401568 값을 인자값으로 넣어준다.
 
 **궁금증 : uaf 취약점을 이용할 때, 공격 코드를 할당하는 과정에서 크기를 같게 해야한다고 들었는데 크기를 확인할 수 있는 방법을 모르겠다.
+
+```asm
+0x0000000000400f00 <+60>:    call   0x400d90 <operator new(unsigned long)@plt>
+   0x0000000000400f05 <+65>:    mov    rbx,rax
+   0x0000000000400f08 <+68>:    mov    edx,0x19
+   0x0000000000400f0d <+73>:    mov    rsi,r12
+   0x0000000000400f10 <+76>:    mov    rdi,rbx
+   0x0000000000400f13 <+79>:    call   0x401264 <Man::Man(std::string, int)>
+   0x0000000000400f18 <+84>:    mov    QWORD PTR [rbp-0x38],rbx
+   0x0000000000400f1c <+88>:    lea    rax,[rbp-0x50]
+   0x0000000000400f20 <+92>:    mov    rdi,rax
+   0x0000000000400f23 <+95>:    call   0x400d00 <std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()@plt>
+   0x0000000000400f28 <+100>:   lea    rax,[rbp-0x12]
+   0x0000000000400f2c <+104>:   mov    rdi,rax
+   0x0000000000400f2f <+107>:   call   0x400d40 <std::allocator<char>::~allocator()@plt>
+   0x0000000000400f34 <+112>:   lea    rax,[rbp-0x11]
+   0x0000000000400f38 <+116>:   mov    rdi,rax
+   0x0000000000400f3b <+119>:   call   0x400d70 <std::allocator<char>::allocator()@plt>
+   0x0000000000400f40 <+124>:   lea    rdx,[rbp-0x11]
+   0x0000000000400f44 <+128>:   lea    rax,[rbp-0x40]
+   0x0000000000400f48 <+132>:   mov    esi,0x4014f5
+   0x0000000000400f4d <+137>:   mov    rdi,rax
+   0x0000000000400f50 <+140>:   call   0x400d10 <std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)@plt>
+   0x0000000000400f55 <+145>:   lea    r12,[rbp-0x40]
+   0x0000000000400f59 <+149>:   mov    edi,0x18
+   0x0000000000400f5e <+154>:   call   0x400d90 <operator new(unsigned long)@plt>
+   0x0000000000400f63 <+159>:   mov    rbx,rax
+   0x0000000000400f66 <+162>:   mov    edx,0x15
+   0x0000000000400f6b <+167>:   mov    rsi,r12
+   0x0000000000400f6e <+170>:   mov    rdi,rbx
+---Type <return> to continue, or q <return> to quit---
+   0x0000000000400f71 <+173>:   call   0x401308 <Woman::Woman(std::string, int)>
+   0x0000000000400f76 <+178>:   mov    QWORD PTR [rbp-0x30],rbx
+   0x0000000000400f7a <+182>:   lea    rax,[rbp-0x40]
+   0x0000000000400f7e <+186>:   mov    rdi,rax
+   0x0000000000400f81 <+189>:   call   0x400d00 <std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()@plt>
+   0x0000000000400f86 <+194>:   lea    rax,[rbp-0x11]
+   0x0000000000400f8a <+198>:   mov    rdi,rax
+   0x0000000000400f8d <+201>:   call   0x400d40 <std::allocator<char>::~allocator()@plt>
+   0x0000000000400f92 <+206>:   mov    esi,0x4014fa
+   0x0000000000400f97 <+211>:   mov    edi,0x602260
+   0x0000000000400f9c <+216>:   call   0x400cf0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+
+```
+해당 부분은 new 생산자를 이용해서 동적할당을 하는 부분이다. 이 부분을 통해 힙으로 할당한 메모리 주소를 알 수 있다.
+https://m.blog.naver.com/dladnguq131/222040844430
+해당 블로그를 보면서 마지막에 왜 after를 두번 해야하는 것인지 알 수 있었다.
