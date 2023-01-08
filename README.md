@@ -257,6 +257,9 @@ give_shell함수는 0x00401570 주소에 위치하고 있고 함수를 call할 �
    0x0000000000400f9c <+216>:   call   0x400cf0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
 
 ```
+이 영상을 보면서 힙 메모리가 할당되는 주소를 찾을 수 있었다.
+https://www.youtube.com/watch?v=QqfIFuSSEjg
+
 해당 부분은 new 생산자를 이용해서 동적할당을 하는 부분이다. 이 부분을 통해 힙으로 할당한 메모리 주소를 알 수 있다.
 https://m.blog.naver.com/dladnguq131/222040844430
 해당 블로그를 보면서 마지막에 왜 after를 두번 해야하는 것인지 알 수 있었다.
